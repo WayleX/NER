@@ -28,8 +28,10 @@ def train():
         for start, end, label in labels:
             #Fix for including mount in dataset
             if 'mount' in text[start:end].lower():
-                print(text[start:end], text[start:end].index(' '))
-                start = text[start:end].index(' ')
+                try:
+                    start = text[start:end].index(' ')
+                except:
+                    continue
             span = doc.char_span(start, end, label=label, alignment_mode="contract")
             #checking if word is correct
             if span is None:
